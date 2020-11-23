@@ -1,0 +1,9 @@
+#Secondary frame for screencaps.
+#Cant have more than one frame in a class. Got to open a new 
+#window and populate that with screen cap.
+
+#Screen Capture ffmpeg -i input.mp4 -ss 00:00:01 -vframes 1 output.jpg
+#Give numerical input for time seek   -ss HH:MM:SS [][][] <--
+
+#Using pack to get them side by side
+#for default 00 in entries
