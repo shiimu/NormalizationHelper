@@ -73,7 +73,7 @@ def getCodecs():
     else:
         codecAudio = noAudio
     if checkB3.get() == 1:
-        saveLog = report + saveFileLoc + normNameGet + '/_LOG.txt'
+        saveLog = report + saveFileLoc + '/' + normNameGet + '_LOG.txt'
     else:
         saveLog = noReport
 
