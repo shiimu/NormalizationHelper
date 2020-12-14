@@ -97,20 +97,22 @@ def startScreenCap():
 ttk.Button(mainframe, text="1.Choose Input", command=getLocation).grid(column=1, row=1)
 ttk.Button(mainframe, text="3.Confirm Name", command=getNormFileName).grid(column=2, row=2)
 ttk.Button(mainframe, text="2.Choose Output", command=getSaveTo).grid(column=3, row=1)
-ttk.Button(mainframe, text="4.Convert", command=convertStartVideo).grid(column=2, row=5,pady=10)
+ttk.Button(mainframe, text="5.Convert", command=convertStartVideo).grid(column=2, row=5,pady=10)
 
 # 3 Entries for HH:MM:SS
 tvalue = StringVar(mainframe, value="00:00:00")
 timeBar = ttk.Entry(mainframe, width=7, textvariable=tvalue)
-timeBar.grid(column=2, row=9, padx=20,pady=20)
+timeBar.grid(column=2, row=9, padx=20,pady=10)
 #Video Screen capture buttons
 #Input, Outputloc, Output=inputname+Screen_Capture+%0.d.png have default time be 00:00:00 if else
-ttk.Button(mainframe, text="4.Screen Capture", command=startScreenCap).grid(column=2, row=10,pady=10)
+ttk.Button(mainframe, text="3.Confirm Time", command=getNormFileName).grid(column=2, row=10, pady=10)
+ttk.Button(mainframe, text="5.Screen Capture", command=startScreenCap).grid(column=2, row=11, pady=20)
+
 
 #Check button for audio or video conversion
-ttk.Checkbutton(mainframe,text='Video Codec', variable=checkB1, onvalue=1, offvalue=0,command=getCodecs).grid(column=3, row=4, sticky=W)
-ttk.Checkbutton(mainframe,text='Audio Codec', variable=checkB2, onvalue=1, offvalue=0,command=getCodecs).grid(column=3, row=5, sticky=W)
-ttk.Checkbutton(mainframe,text='Enable Log', variable=checkB3, onvalue=1, offvalue=0,command=getCodecs).grid(column=3, row=6, sticky=W)
+ttk.Checkbutton(mainframe,text='4.Video Codec', variable=checkB1, onvalue=1, offvalue=0,command=getCodecs).grid(column=3, row=4, sticky=W)
+ttk.Checkbutton(mainframe,text='4.Audio Codec', variable=checkB2, onvalue=1, offvalue=0,command=getCodecs).grid(column=3, row=5, sticky=W)
+ttk.Checkbutton(mainframe,text='4.Enable Log', variable=checkB3, onvalue=1, offvalue=0,command=getCodecs).grid(column=3, row=6, sticky=W)
 
 #Text entry widget for setting normalized filename
 normFileN = ttk.Entry(mainframe)
@@ -120,7 +122,7 @@ def exitProgram():
     root.destroy()
     pass
 
-ttk.Button(mainframe, text="Exit", command=exitProgram).grid(column=2, row=15, sticky=S)
+ttk.Button(mainframe, text="Exit", command=exitProgram).grid(column=2, row=15, sticky=S, pady=10)
 
 
 root.mainloop()
