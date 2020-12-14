@@ -13,9 +13,10 @@ root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
 # Ask native filename and use it in command as input. location = yourfile.name
+# Wrap it with "" to get input with spaces
 def getLocation():
     global inputFileLoc
-    inputFileLoc = filedialog.askopenfilename()
+    inputFileLoc = '"' + filedialog.askopenfilename() + '"'
     print(inputFileLoc)
 
 def getSaveTo():
@@ -73,7 +74,7 @@ def getCodecs():
     else:
         codecAudio = noAudio
     if checkB3.get() == 1:
-        saveLog = report + saveFileLoc + '/' + normNameGet + '_LOG.txt'
+        saveLog = report + inputFileLoc + '_LOG.txt'
     else:
         saveLog = noReport
 
