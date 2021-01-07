@@ -21,7 +21,7 @@ def getLocation():
 
 def getSaveTo():
     global saveFileLoc
-    saveFileLoc = filedialog.askdirectory()
+    saveFileLoc = '"' + filedialog.askdirectory() + '"'
     print(saveFileLoc)
 
 def getNormFileName():
