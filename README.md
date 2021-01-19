@@ -1,6 +1,8 @@
 # NormalizationHelper
+
+
 Gui wrapper for ffmpeg tools i often use.
-Helps with normalization. Aimed at a/v files
+Helps with normalization of archivable files. Aimed at a/v files
 
 Converts ffmpeg compatible files into .mkv format
 enable/disable video codec, audio codec and logging.
