@@ -2,6 +2,8 @@ from tkinter import*
 from tkinter import ttk
 from tkinter import filedialog
 from subprocess import check_output
+# To get the filename
+import os
 
 root = Tk()
 root.title("Video To FFv1_Flac Converter")
@@ -16,9 +18,18 @@ root.rowconfigure(0, weight=1)
 # Wrap it with "" to get input with spaces
 def getLocation():
     global inputFileLoc
-    inputFileLoc = '"' + filedialog.askopenfilename() + '"'
+    global scFileNo
+    global inputFLSC
+    global inputFLSCName
+    inputFileLoc = filedialog.askopenfilename()
+    # Badly named getting into only filename
+    inputFLSC = os.path.basename(inputFileLoc)
+    inputFLSCName = os.path.splitext(inputFLSC)[0]
     print(inputFileLoc)
-
+    print(inputFLSC)
+    #set scFileNo back to 0 so it will not go up endlessly
+    scFileNo = 0
+    
 def getSaveTo():
     global saveFileLoc
     saveFileLoc = '"' + filedialog.askdirectory() + '"'
@@ -33,6 +44,8 @@ def getNormFileName():
     print(timeGetter)
 
 normalize = '' # for use to test scrit
+# Screen Capture file number. To make multiple screenshots without overwriting.
+scFileNo = 0
 
 #Checkbox widget
 checkB1 = IntVar()
@@ -81,17 +94,25 @@ def getCodecs():
 # Start the with inputs from getLocation, getSaveTo and logToFile.
 def convertStartVideo():
     saveFileName = normNameGet + '.mkv'# use as saveas for now. '' + "_FFV1_FLAC" NEEDS A FILETYPE
-    ffToMkv = "ffmpeg -i "+ inputFileLoc + codecVideo + codecAudio + saveFileLoc + '/' + saveFileName + saveLog
+    ffToMkv = "ffmpeg -i "+ '"' + inputFileLoc + '"' + codecVideo + codecAudio + saveFileLoc + '/' + saveFileName + saveLog
     normalize = check_output(ffToMkv, shell=True, universal_newlines=True)
     print(normalize)
     print("DONE!")
 # FINISH THIS!!! Command for screen capture while loop for not overwriting the same imagefile over and over
 def startScreenCap():
+    global scFileNo
+    scFileNo = scFileNo + 1
+    # If name is entered use that if not use original filename
+    if normNameGet != '':
+        scFileName = normNameGet + "_" + str(scFileNo)
+    else:
+        scFileName = inputFLSCName + "_" + str(scFileNo)
     fileEnding = ".png"
-    startSC  = "ffmpeg -i " + inputFileLoc + " -ss " + timeGetter + " -frames 1 " + saveFileLoc + "/" + "Screen_Capture_%0d" + fileEnding
+    startSC  = "ffmpeg -i " + '"' + inputFileLoc + '"' + " -ss " + timeGetter + " -frames 1 " + saveFileLoc + "/" + scFileName + fileEnding
     takesnap = check_output(startSC, shell=True, universal_newlines=True)
     print(takesnap)
     print("DONE!")
+
 
 #Videoconversion buttons
 ttk.Button(mainframe, text="1.Choose Input", command=getLocation).grid(column=1, row=1)
