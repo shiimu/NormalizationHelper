@@ -2,11 +2,12 @@ from tkinter import*
 from tkinter import ttk
 from tkinter import filedialog
 from subprocess import check_output
+import winsound
 # To get the filename
 import os
 
 root = Tk()
-root.title("Video To FFv1_Flac Converter")
+root.title("Normalization Helper")
 root.geometry("380x400")
 
 mainframe = ttk.Frame(root, padding="12 12 12 12")
@@ -98,6 +99,7 @@ def convertStartVideo():
     normalize = check_output(ffToMkv, shell=True, universal_newlines=True)
     print(normalize)
     print("DONE!")
+    winsound.PlaySound('SystemDefault', winsound.MB_OK)
 # FINISH THIS!!! Command for screen capture while loop for not overwriting the same imagefile over and over
 def startScreenCap():
     global scFileNo
@@ -112,7 +114,7 @@ def startScreenCap():
     takesnap = check_output(startSC, shell=True, universal_newlines=True)
     print(takesnap)
     print("DONE!")
-
+    winsound.PlaySound('SystemDefault', winsound.MB_OK)
 
 #Videoconversion buttons
 ttk.Button(mainframe, text="1.Choose Input", command=getLocation).grid(column=1, row=1)
@@ -128,7 +130,6 @@ timeBar.grid(column=2, row=9, padx=20,pady=10)
 #Input, Outputloc, Output=inputname+Screen_Capture+%0.d.png have default time be 00:00:00 if else
 ttk.Button(mainframe, text="3.Confirm Time", command=getNormFileName).grid(column=2, row=10, pady=10)
 ttk.Button(mainframe, text="5.Screen Capture", command=startScreenCap).grid(column=2, row=11, pady=20)
-
 
 #Check button for audio or video conversion
 ttk.Checkbutton(mainframe,text='4.Video Codec', variable=checkB1, onvalue=1, offvalue=0,command=getCodecs).grid(column=3, row=4, sticky=W)
